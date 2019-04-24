@@ -1,28 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { withRouter } from 'react-router-dom';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.js</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import MobxRouterTest from './components/MobxRouterTest';
+import TestMap from './components/TestMap';
+
+@inject('routing')
+@inject('test')
+@observer
+class App extends Component {
+  render() {
+    return <TestMap />;
+  }
 }
 
-export default App;
+export default withRouter(App);
