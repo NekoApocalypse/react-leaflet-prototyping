@@ -1,12 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Custom Features
 
 This project has these additional features:
 
 * Eslint with Airbnb style guide.
 
-* Mobx with Decorator babel options.
+* Mobx with Decorator support for babel and Eslint.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 

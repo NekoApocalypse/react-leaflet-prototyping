@@ -8,7 +8,7 @@ const styles = theme => ({
   },
 });
 
-class TestMap extends Component {
+class MapTest extends Component {
   componentDidMount() {
     const myMap = L.map('testMap').setView([51.505, -0.09], 13);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -23,4 +23,4 @@ class TestMap extends Component {
   }
 }
 
-export default withStyles(styles)(TestMap);
+export default withStyles(styles)(MapTest);

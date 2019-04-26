@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 
-import MobxRouterTest from './components/MobxRouterTest';
-import TestMap from './components/TestMap';
+// import MobxRouterTest from './components/MobxRouterTest';
+// import MapTest from './components/MapTest';
+import MapPage from './containers/MapPage';
 
-@inject('routing')
-@inject('test')
+@inject('rootStore')
 @observer
 class App extends Component {
   render() {
-    return <TestMap />;
+    return (
+      <Switch>
+        <Route exact path="/" component={MapPage} />
+      </Switch>
+    );
   }
 }
 
