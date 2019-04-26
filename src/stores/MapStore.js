@@ -42,7 +42,7 @@ class MapStore {
 
   removeMarker(marker) {
     this.markers.splice(this.markers.indexOf(marker), 1);
-    marker.dispose();
+    // marker.dispose();
   }
 
   constructor() {
