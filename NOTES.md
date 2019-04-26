@@ -30,3 +30,10 @@ Refer to this if you want to stop propagation.
 	}
 
 Reference: https://github.com/LiveBy/react-leaflet-control/issues/2#issuecomment-234807270
+
+## Other Problems:
+
+* No Prop-Types.
+
+* No unit tests.
+

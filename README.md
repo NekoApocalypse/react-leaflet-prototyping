@@ -1,5 +1,7 @@
 ## Custom Features
 
+** Important ** Read `NOTES.md` before proceeding!!
+
 This project has these additional features:
 
 * Eslint with Airbnb style guide.
