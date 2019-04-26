@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 // import { Typography } from '@material-ui/core';
 
 import InvisibleControl from './InvisibleControl';
+import ButtonControl from './ButtonControl';
 
 const styles = theme => ({
   root: {
@@ -39,6 +40,7 @@ const BaseMap = (props) => {
       />
       <InvisibleControl />
       <ZoomControl position="topleft" />
+      <ButtonControl />
       <MarkerSet markers={markers} />
     </Map>
   );
