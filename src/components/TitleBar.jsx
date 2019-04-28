@@ -7,6 +7,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
+import { observer } from 'mobx-react';
 
 const styles = {
   root: {
@@ -14,7 +15,7 @@ const styles = {
   },
 };
 
-const TitleBar = (props) => {
+const TitleBar = observer((props) => {
   const { classes } = props;
   return (
     <AppBar position="absolute" className={classes.root}>
@@ -28,6 +29,6 @@ const TitleBar = (props) => {
       </Toolbar>
     </AppBar>
   );
-};
+});
 
 export default withStyles(styles)(TitleBar);

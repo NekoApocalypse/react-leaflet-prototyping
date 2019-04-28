@@ -9,6 +9,7 @@ import {
   LayersControl,
 } from 'react-leaflet';
 import { withStyles } from '@material-ui/core/styles';
+import { PropTypes, observer } from 'mobx-react';
 // import { Typography } from '@material-ui/core';
 
 import { layersProperty } from '../consts';
@@ -23,7 +24,8 @@ const styles = theme => ({
   },
 });
 
-const MarkerSet = (props) => {
+// Renders a set of markers.
+const MarkerSet = observer((props) => {
   const { markers } = props;
   return (
     <React.Fragment>
@@ -35,9 +37,10 @@ const MarkerSet = (props) => {
       ))}
     </React.Fragment>
   );
-};
+});
 
-const BaseMap = (props) => {
+// The Base Map component.
+const BaseMap = observer((props) => {
   const {
     position, zoom, markers, classes,
   } = props;
@@ -62,6 +65,10 @@ const BaseMap = (props) => {
       <MarkerSet markers={markers} />
     </Map>
   );
+});
+
+BaseMap.propTypes = {
+  position: PropTypes.arrayOrObservableArrayOf(PropTypes.string).isRequired,
 };
 
 export default withStyles(styles)(BaseMap);

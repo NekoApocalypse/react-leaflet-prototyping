@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import uuid from 'node-uuid';
 
 const defaultPosition = [33.0, 120.7];
@@ -30,6 +30,7 @@ class MapStore {
 
   @observable markers = [];
 
+  @action.bound
   createMarker(position, id = null) {
     const params = {
       store: this,
@@ -40,6 +41,7 @@ class MapStore {
     this.markers.push(marker);
   }
 
+  @action.bound
   removeMarker(marker) {
     this.markers.splice(this.markers.indexOf(marker), 1);
     // marker.dispose();

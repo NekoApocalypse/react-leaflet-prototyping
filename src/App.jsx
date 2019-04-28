@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 
-// import MobxRouterTest from './components/MobxRouterTest';
+import MobxRouterTest from './components/MobxRouterTest';
 // import MapTest from './components/MapTest';
 import MapPage from './containers/MapPage';
 
@@ -14,6 +14,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" component={MapPage} />
+        <Route path="/tests/" component={MobxRouterTest} />
       </Switch>
     );
   }

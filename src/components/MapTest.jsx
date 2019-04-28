@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import { withStyles } from '@material-ui/core/styles';
+import { observer } from 'mobx-react';
 
 const styles = theme => ({
   root: {
@@ -8,6 +9,7 @@ const styles = theme => ({
   },
 });
 
+@observer
 class MapTest extends Component {
   componentDidMount() {
     const myMap = L.map('testMap').setView([51.505, -0.09], 13);

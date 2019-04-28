@@ -5,6 +5,11 @@ class TestStore {
 
   @observable testString = 'test';
 
+  @observable author = {
+    name: 'John',
+    age: 23,
+  }
+
   @computed get magicNumber() {
     return this.testNumber + 1;
   }
@@ -21,6 +26,11 @@ class TestStore {
   changeState(x, str) {
     this.testNumber += x;
     this.testString += str;
+  }
+
+  @action.bound
+  changeAuthorName() {
+    this.author.name += 'wow';
   }
 }
 

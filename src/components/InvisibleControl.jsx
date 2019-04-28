@@ -1,15 +1,16 @@
 import React from 'react';
 import Control from 'react-leaflet-control';
+import { observer } from 'mobx-react';
 
 // A place holdercontrol to push other controls around
-const InvisibleControl = (props) => {
+const InvisibleControl = observer((props) => {
   const { position, height } = props;
   return (
     <Control position={position}>
       <div style={{ height }} />
     </Control>
   );
-};
+});
 
 InvisibleControl.defaultProps = {
   position: 'topleft',

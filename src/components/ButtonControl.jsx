@@ -3,6 +3,7 @@ import Control from 'react-leaflet-control';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { DomEvent } from 'leaflet';
+import { observer } from 'mobx-react';
 
 const styles = {
   root: {
@@ -22,6 +23,7 @@ const styles = {
   },
 };
 
+@observer
 class ButtonControl extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +44,7 @@ class ButtonControl extends Component {
     return (
       <Control position="topleft" className={classes.root}>
         <div ref={this.setRefContainer}>
-          <Button className={classes.button} onClick={handleClick}/>
+          <Button className={classes.button} onClick={handleClick} />
         </div>
       </Control>
     );

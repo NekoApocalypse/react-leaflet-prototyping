@@ -38,6 +38,16 @@ Reference: https://github.com/LiveBy/react-leaflet-control/issues/2#issuecomment
 ** The example code is different from reference code **
 ** Reference code does not work without ES7 **
 
+## ALL components should be observer
+
+See *How Multiple Components Will Render* section in [https://mobx.js.org/best/react.html](MobX documentation).
+
+Also, see `./components/MobxRouterTest.jsx` to see potential consequences.
+
+When passing props to non-observer components, make sure the props are **immutable**.
+
+Specifically: If parent component pass observable object `author` to child component, and child component access `author.name`,
+parent component will not react to `author.name`.
 
 ## Other Problems:
 
