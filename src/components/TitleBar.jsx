@@ -18,7 +18,7 @@ const TitleBar = (props) => {
   const { classes } = props;
   return (
     <AppBar position="absolute" className={classes.root}>
-      <Toolbar>
+      <Toolbar disableGutters>
         <IconButton color="inherit">
           <MenuIcon />
         </IconButton>

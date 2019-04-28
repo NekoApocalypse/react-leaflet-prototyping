@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import {
-  Map, TileLayer, Marker, Popup, Tooltip, ZoomControl,
+  Map,
+  TileLayer,
+  Marker,
+  Popup,
+  Tooltip,
+  ZoomControl,
+  LayersControl,
 } from 'react-leaflet';
 import { withStyles } from '@material-ui/core/styles';
 // import { Typography } from '@material-ui/core';
 
+import { layersProperty } from '../consts';
 import InvisibleControl from './InvisibleControl';
 import ButtonControl from './ButtonControl';
+
+const { BaseLayer, Overlay } = LayersControl;
 
 const styles = theme => ({
   root: {
@@ -34,11 +43,20 @@ const BaseMap = (props) => {
   } = props;
   return (
     <Map center={position} zoom={zoom} className={classes.root} zoomControl={false}>
-      <TileLayer
-        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
       <InvisibleControl />
+      <InvisibleControl position="topright" />
+      <LayersControl position="topright">
+        <BaseLayer checked name="OpenStreetMap from web">
+          <TileLayer
+            {...layersProperty.osmWeb}
+          />
+        </BaseLayer>
+        <BaseLayer name="OpenStreetMap Black and White from web">
+          <TileLayer
+            {...layersProperty.osmWebBlackWhite}
+          />
+        </BaseLayer>
+      </LayersControl>
       <ZoomControl position="topleft" />
       <ButtonControl />
       <MarkerSet markers={markers} />

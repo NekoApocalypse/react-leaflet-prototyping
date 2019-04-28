@@ -41,7 +41,9 @@ class ButtonControl extends Component {
     const { classes, handleClick } = this.props;
     return (
       <Control position="topleft" className={classes.root}>
-        <Button className={classes.button} onClick={handleClick} />
+        <div ref={this.setRefContainer}>
+          <Button className={classes.button} onClick={handleClick}/>
+        </div>
       </Control>
     );
   }
