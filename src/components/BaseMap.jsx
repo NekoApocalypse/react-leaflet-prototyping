@@ -15,6 +15,7 @@ import { PropTypes, observer } from 'mobx-react';
 import { layersProperty } from '../consts';
 import InvisibleControl from './InvisibleControl';
 import ButtonControl from './ButtonControl';
+import SimpleModal from './SimpleModal';
 
 const { BaseLayer, Overlay } = LayersControl;
 
@@ -40,32 +41,57 @@ const MarkerSet = observer((props) => {
 });
 
 // The Base Map component.
-const BaseMap = observer((props) => {
-  const {
-    position, zoom, markers, classes,
-  } = props;
-  return (
-    <Map center={position} zoom={zoom} className={classes.root} zoomControl={false}>
-      <InvisibleControl />
-      <InvisibleControl position="topright" />
-      <LayersControl position="topright">
-        <BaseLayer checked name="OpenStreetMap from web">
-          <TileLayer
-            {...layersProperty.osmWeb}
-          />
-        </BaseLayer>
-        <BaseLayer name="OpenStreetMap Black and White from web">
-          <TileLayer
-            {...layersProperty.osmWebBlackWhite}
-          />
-        </BaseLayer>
-      </LayersControl>
-      <ZoomControl position="topleft" />
-      <ButtonControl />
-      <MarkerSet markers={markers} />
-    </Map>
-  );
-});
+@observer
+class BaseMap extends Component {
+  state = {
+    modalOpen: false,
+  }
+
+  handleModalOpen = () => {
+    this.setState({
+      modalOpen: true,
+    });
+  }
+
+  handleModalClose = () => {
+    this.setState({
+      modalOpen: false,
+    });
+  }
+
+  render() {
+    const {
+      position, zoom, markers, classes,
+    } = this.props;
+    const {
+      modalOpen,
+    } = this.state;
+    return (
+      <React.Fragment>
+        <Map center={position} zoom={zoom} className={classes.root} zoomControl={false}>
+          <InvisibleControl />
+          <InvisibleControl position="topright" />
+          <LayersControl position="topright">
+            <BaseLayer checked name="OpenStreetMap from web">
+              <TileLayer
+                {...layersProperty.osmWeb}
+              />
+            </BaseLayer>
+            <BaseLayer name="OpenStreetMap Black and White from web">
+              <TileLayer
+                {...layersProperty.osmWebBlackWhite}
+              />
+            </BaseLayer>
+          </LayersControl>
+          <ZoomControl position="topleft" />
+          <ButtonControl handleClick={this.handleModalOpen} />
+          <MarkerSet markers={markers} />
+        </Map>
+        <SimpleModal open={modalOpen} handleClose={this.handleModalClose} />
+      </React.Fragment>
+    );
+  }
+}
 
 BaseMap.propTypes = {
   position: PropTypes.arrayOrObservableArrayOf(PropTypes.string).isRequired,
