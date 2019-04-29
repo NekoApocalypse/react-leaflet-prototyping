@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { DomEvent } from 'leaflet';
 import { observer } from 'mobx-react';
+import { PropTypes } from 'prop-types';
 
 const styles = {
   root: {
@@ -44,11 +45,19 @@ class ButtonControl extends Component {
     return (
       <Control position="topleft" className={classes.root}>
         <div ref={this.setRefContainer}>
-          <Button className={classes.button} onClick={handleClick} />
+          <Button className={classes.button} onClick={handleClick}>
+            M
+          </Button>
         </div>
       </Control>
     );
   }
 }
+
+ButtonControl.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(ButtonControl);

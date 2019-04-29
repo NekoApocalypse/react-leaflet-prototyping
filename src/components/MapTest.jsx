@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import L from 'leaflet';
 import { withStyles } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
+import { PropTypes } from 'prop-types';
 
-const styles = theme => ({
+const styles = {
   root: {
     height: '400px',
   },
-});
+};
 
 @observer
 class MapTest extends Component {
@@ -24,5 +25,10 @@ class MapTest extends Component {
     return <div id="testMap" className={classes.root} />;
   }
 }
+
+MapTest.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(MapTest);

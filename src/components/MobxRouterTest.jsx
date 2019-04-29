@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
+import { inject, observer, PropTypes as oPropTypes } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+import RootStore from '../stores';
 
 // dereferencing does not work if it is not an observer
 const NonObserverChild = (props) => {
   const { author } = props;
   return <p>{`Author Name: ${author.name}`}</p>;
+};
+
+NonObserverChild.propTypes = {
+  author: oPropTypes.objectOrObservableObject.isRequired,
 };
 
 // dereferencing works
@@ -22,7 +28,7 @@ class MobxRouterTest extends Component {
   }
 
   render() {
-    const { 
+    const {
       rootStore: {
         routerStore: {
           location,
@@ -39,7 +45,7 @@ class MobxRouterTest extends Component {
           changeAuthorName,
           author,
         },
-      }
+      },
     } = this.props;
     return (
       <React.Fragment>
@@ -72,5 +78,9 @@ class MobxRouterTest extends Component {
     );
   }
 }
+
+MobxRouterTest.propTypes = {
+  rootStore: PropTypes.instanceOf(RootStore).isRequired,
+};
 
 export default withRouter(MobxRouterTest);

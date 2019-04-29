@@ -9,21 +9,24 @@ import {
   LayersControl,
 } from 'react-leaflet';
 import { withStyles } from '@material-ui/core/styles';
-import { PropTypes, observer } from 'mobx-react';
+import { PropTypes as oPropTypes, observer } from 'mobx-react';
+import PropTypes from 'prop-types';
 // import { Typography } from '@material-ui/core';
 
+import { Marker as MapMarker } from '../stores/MapStore';
 import { layersProperty } from '../consts';
 import InvisibleControl from './InvisibleControl';
 import ButtonControl from './ButtonControl';
 import SimpleModal from './SimpleModal';
 
-const { BaseLayer, Overlay } = LayersControl;
+// const { BaseLayer, Overlay } = LayersControl;
+const { BaseLayer } = LayersControl;
 
-const styles = theme => ({
+const styles = {
   root: {
     height: '100vh',
   },
-});
+};
 
 // Renders a set of markers.
 const MarkerSet = observer((props) => {
@@ -94,7 +97,13 @@ class BaseMap extends Component {
 }
 
 BaseMap.propTypes = {
-  position: PropTypes.arrayOrObservableArrayOf(PropTypes.string).isRequired,
+  position: oPropTypes.arrayOrObservableArrayOf(PropTypes.number).isRequired,
+  zoom: PropTypes.number.isRequired,
+  markers: oPropTypes.arrayOrObservableArrayOf(
+    PropTypes.instanceOf(MapMarker),
+  ).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(BaseMap);

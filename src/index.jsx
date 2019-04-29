@@ -15,13 +15,16 @@ import RootStore from './stores';
 
 // --- Hotfix for leaflet icon ---
 // !!! Do not remove !!!
-delete L.Icon.Default.prototype._getIconUrl;
 
+/* eslint-disable no-underscore-dangle */
+delete L.Icon.Default.prototype._getIconUrl;
+/* eslint-disable global-require */
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
+
 // --- Hotfix for leaflet icon ---
 
 const rootStore = new RootStore();
