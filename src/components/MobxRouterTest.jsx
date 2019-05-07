@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import RootStore from '../stores';
 
+import FileInput from './examples/FileInput';
+
 // dereferencing does not work if it is not an observer
 const NonObserverChild = (props) => {
   const { author } = props;
@@ -74,6 +76,7 @@ class MobxRouterTest extends Component {
           <div>{`Author Name: ${this.authorName}`}</div>
           <button onClick={changeAuthorName} type="button">Change Author Name</button>
         </div>
+        <FileInput />
       </React.Fragment>
     );
   }

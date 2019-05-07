@@ -18,6 +18,19 @@ class MapPage extends Component {
     rootStore: PropTypes.instanceOf(RootStore).isRequired,
   }
 
+  handleCreateMarker = (position, id) => {
+    const { rootStore: { mapStore } } = this.props;
+    mapStore.createMarker(position, id);
+  }
+
+  handleMoveMarker = (position, id) => {
+    const { rootStore: { mapStore } } = this.props;
+    const markerIdx = mapStore.markersIds.indexOf(id);
+    if (markerIdx < 0) return;
+    const marker = mapStore.markers[markerIdx];
+    marker.setPosition(position);
+  }
+
   render() {
     const {
       rootStore: {
@@ -36,6 +49,7 @@ class MapPage extends Component {
           position={position}
           zoom={zoom}
           markers={markers}
+          handleCreateMarker={this.handleCreateMarker}
         />
       </React.Fragment>
     );

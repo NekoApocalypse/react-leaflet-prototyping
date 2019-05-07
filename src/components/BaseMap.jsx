@@ -62,6 +62,25 @@ class BaseMap extends Component {
     });
   }
 
+  handleCreateMarker = (position, id) => {
+    const { handleCreateMarker } = this.props;
+    handleCreateMarker(position, id);
+  }
+
+  createExampleMarker = () => {
+    const { handleCreateMarker } = this.props;
+    const examplePosition = [30, 110];
+    const exampleId = '1';
+    handleCreateMarker(examplePosition, exampleId);
+  }
+
+  setExampleMarker = () => {
+    const { handleMoveMarker } = this.props;
+    const exampleTarget = [40, 130];
+    const exampleId = '1';
+    handleMoveMarker(exampleTarget, exampleId);
+  }
+
   render() {
     const {
       position, zoom, markers, classes,
@@ -87,7 +106,15 @@ class BaseMap extends Component {
             </BaseLayer>
           </LayersControl>
           <ZoomControl position="topleft" />
-          <ButtonControl handleClick={this.handleModalOpen} />
+          <ButtonControl handleClick={this.handleModalOpen}>
+            M
+          </ButtonControl>
+          <ButtonControl handleClick={this.createExampleMarker}>
+            Add
+          </ButtonControl>
+          <ButtonControl handleClick={this.createExampleMarker}>
+            Set
+          </ButtonControl>
           <MarkerSet markers={markers} />
         </Map>
         <SimpleModal open={modalOpen} handleClose={this.handleModalClose} />
@@ -102,6 +129,8 @@ BaseMap.propTypes = {
   markers: oPropTypes.arrayOrObservableArrayOf(
     PropTypes.instanceOf(MapMarker),
   ).isRequired,
+  handleCreateMarker: PropTypes.func.isRequired,
+  handleMoveMarker: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
 };

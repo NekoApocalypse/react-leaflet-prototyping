@@ -41,12 +41,17 @@ class ButtonControl extends Component {
   }
 
   render() {
-    const { classes, handleClick } = this.props;
+    const {
+      classes,
+      handleClick,
+      children,
+      buttonClass = classes.button,
+    } = this.props;
     return (
       <Control position="topleft" className={classes.root}>
         <div ref={this.setRefContainer}>
-          <Button className={classes.button} onClick={handleClick}>
-            M
+          <Button className={buttonClass} onClick={handleClick}>
+            {children}
           </Button>
         </div>
       </Control>
@@ -58,6 +63,12 @@ ButtonControl.propTypes = {
   handleClick: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
+  buttonClass: PropTypes.string,
+};
+
+ButtonControl.defaultProps = {
+  buttonClass: undefined,
 };
 
 export default withStyles(styles)(ButtonControl);
