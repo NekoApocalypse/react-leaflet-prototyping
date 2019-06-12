@@ -4,6 +4,7 @@ import {
   IconButton,
   Toolbar,
   Typography,
+  // LinearProgress,
   withStyles,
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
@@ -27,6 +28,8 @@ const TitleBar = observer((props) => {
           West Pacific Next
         </Typography>
       </Toolbar>
+      {// <LinearProgress color="primary" />
+      }
     </AppBar>
   );
 });

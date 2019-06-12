@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import {
   Map,
   TileLayer,
@@ -12,6 +12,11 @@ import { withStyles } from '@material-ui/core/styles';
 import { PropTypes as oPropTypes, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 // import { Typography } from '@material-ui/core';
+import L from 'leaflet';
+import 'leaflet-plugin-trackplayback/dist/leaflet.trackplayback';
+import 'leaflet-plugin-trackplayback/dist/control.trackplayback';
+import 'leaflet-plugin-trackplayback/dist/control.playback.css';
+import 'leaflet.pm';
 
 import { Marker as MapMarker } from '../stores/MapStore';
 import { layersProperty } from '../consts';
@@ -48,6 +53,40 @@ const MarkerSet = observer((props) => {
 class BaseMap extends Component {
   state = {
     modalOpen: false,
+  }
+
+  mapRef = createRef();
+
+  mapElement = null;
+
+  componentDidMount() {
+    const map = this.mapRef.current.leafletElement;
+    this.mapElement = map;
+    this.initTestTrack();
+  }
+
+  initTestTrack = () => {
+    const map = this.mapElement;
+    const trackplayback = L.trackplayback(
+      [
+        { lat: 30, lng: 117, time: 1502520000, info: [{ key: 'shipname', value: 'example' }, { key: 'id', value: 'null' }] },
+        { lat: 30, lng: 118, time: 1502530000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 119, time: 1502531000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 120, time: 1502532000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 121, time: 1502533000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 122, time: 1502534000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 123, time: 1502535000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 124, time: 1502536000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 125, time: 1502537000, info: [{ key: 'shipname', value: 'example' }] },
+        { lat: 30, lng: 126, time: 1502538000, info: [{ key: 'shipname', value: 'example' }] },
+      ],
+      map,
+    );
+    const trackplaybackControl = L.trackplaybackcontrol(
+      trackplayback,
+      { position: 'bottomleft' },
+    );
+    trackplaybackControl.addTo(map);
   }
 
   handleModalOpen = () => {
@@ -90,7 +129,13 @@ class BaseMap extends Component {
     } = this.state;
     return (
       <React.Fragment>
-        <Map center={position} zoom={zoom} className={classes.root} zoomControl={false}>
+        <Map
+          center={position}
+          zoom={zoom}
+          className={classes.root}
+          zoomControl={false}
+          ref={this.mapRef}
+        >
           <InvisibleControl />
           <InvisibleControl position="topright" />
           <LayersControl position="topright">

@@ -3,8 +3,13 @@ import { inject, observer, PropTypes as oPropTypes } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import RootStore from '../stores';
+import { useTheme } from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 import FileInput from './examples/FileInput';
+import DateTimeExample from './examples/DateTimeExample';
+import { Typography, Button, CssBaseline } from '@material-ui/core';
+import customTheme from '../theme';
 
 // dereferencing does not work if it is not an observer
 const NonObserverChild = (props) => {
@@ -18,6 +23,16 @@ NonObserverChild.propTypes = {
 
 // dereferencing works
 const ObserverChild = observer(NonObserverChild);
+
+const ThemeGetter = (props) => {
+  const theme = useTheme();
+  console.log(theme);
+  return (
+    <Typography>
+      {JSON.stringify(theme, null, 2)}
+    </Typography>
+  );
+};
 
 @inject('rootStore')
 @observer
@@ -76,7 +91,10 @@ class MobxRouterTest extends Component {
           <div>{`Author Name: ${this.authorName}`}</div>
           <button onClick={changeAuthorName} type="button">Change Author Name</button>
         </div>
+        <Button color="primary" variant="contained">TEST</Button>
         <FileInput />
+        <DateTimeExample />
+        <ThemeGetter />
       </React.Fragment>
     );
   }

@@ -6,12 +6,16 @@ import { Provider } from 'mobx-react';
 import { syncHistoryWithStore } from 'mobx-react-router';
 import { Router, Route } from 'react-router';
 import L from 'leaflet';
+import { ThemeProvider } from '@material-ui/styles';
+import { Button } from '@material-ui/core';
 
 import 'leaflet/dist/leaflet.css';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import RootStore from './stores';
+import customTheme from './theme';
+import { CssBaseline } from '@material-ui/core';
 
 // --- Hotfix for leaflet icon ---
 // !!! Do not remove !!!
@@ -34,9 +38,12 @@ const history = syncHistoryWithStore(browserHistory, rootStore.routerStore);
 
 ReactDOM.render(
   <Provider rootStore={rootStore}>
-    <Router history={history}>
-      <Route path="/" component={App} />
-    </Router>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <Router history={history}>
+        <Route path="/" component={App} />
+      </Router>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root'),
 );
